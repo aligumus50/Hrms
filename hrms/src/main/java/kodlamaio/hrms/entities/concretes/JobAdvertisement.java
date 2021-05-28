@@ -52,7 +52,7 @@ public class JobAdvertisement {
 	@Column(name = "application_last_date")
 	private Date applicationLastDate;
 	
-	@Column(name = "status")
+	@Column(name = "status") //aktif-pasif
 	private boolean status;
 
 }
