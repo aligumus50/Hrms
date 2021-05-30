@@ -32,6 +32,7 @@ public class EmployeerManager implements EmployeerService {
 		super();
 		this.employeerDao = employeerDao;
 		this.emailCheckService = emailCheckService;
+		this.emailSendService = emailSendService;
 	}
 
 	@Override
