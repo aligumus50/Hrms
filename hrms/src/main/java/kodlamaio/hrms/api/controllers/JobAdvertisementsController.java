@@ -14,13 +14,14 @@ import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 
 @RestController
 @RequestMapping("api/jobadvertisements")
 public class JobAdvertisementsController {
 
 	private JobAdvertisementService jobAdvertisementService;
-	
+
 	@Autowired
 	public JobAdvertisementsController(JobAdvertisementService jobAdvertisementService) {
 		super();
@@ -28,48 +29,62 @@ public class JobAdvertisementsController {
 	}
 
 	@GetMapping("/getall")
-	public DataResult<List<JobAdvertisement>> getAll(){
-		
+	public DataResult<List<JobAdvertisement>> getAll() {
+
 		return this.jobAdvertisementService.getAll();
 	}
-	
+
 	@PostMapping("/add")
 	public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
-		
+
 		return this.jobAdvertisementService.add(jobAdvertisement);
 	}
-	
+
 	@GetMapping("/getByJobDescription")
-	public DataResult<List<JobAdvertisement>> getByJobDescription(@RequestParam String name){
-		
+	public DataResult<List<JobAdvertisement>> getByJobDescription(@RequestParam String name) {
+
 		return this.jobAdvertisementService.getByJobDescription(name);
 	}
-	
+
 	@GetMapping("/getByStatus")
-	public DataResult<List<JobAdvertisement>> getByStatus(Boolean status){
+	public DataResult<List<JobAdvertisement>> getByStatus(Boolean status) {
 		return this.jobAdvertisementService.getByStatus(status);
 	}
-	
-	@GetMapping("/getByStatusOrderByCreatedDateAsc")
-	public DataResult<List<JobAdvertisement>> getByStatusOrderByCreatedDateAsc(Boolean status){
+
+	// aktif iş ilanı2
+	@GetMapping("/getJobAdvertisementDetailsByStatus")
+	public DataResult<List<JobAdvertisementDto>> getJobAdvertisementDetailsByStatus(Boolean status) {
+
+		return this.jobAdvertisementService.getJobAdvertisementDetailsByStatus(status);
+
+	}
+
+	/*@GetMapping("/getByStatusOrderByCreatedDateAsc")
+	public DataResult<List<JobAdvertisement>> getJobAdvertisementDetailsByStatusOrderDate(Boolean status) {
 		return this.jobAdvertisementService.getByStatusOrderByCreatedDateAsc(status);
-	}
+	}*/
 	
-	@GetMapping("/getByEmployeerIdAndStatus")
-	public DataResult<List<JobAdvertisement>> getByEmployeerId(int employeerId, Boolean status){
-		
+	@GetMapping("/getJobAdvertisementDetailsByStatusOrderDate")
+	public DataResult<List<JobAdvertisementDto>> getJobAdvertisementDetailsByStatusOrderDate(Boolean status) {
+		return this.jobAdvertisementService.getJobAdvertisementDetailsByStatusOrderDate(status);
+	}
+
+	/*@GetMapping("/getByEmployeerIdAndStatus")
+	public DataResult<List<JobAdvertisement>> getByEmployeerId(int employeerId, Boolean status) {
+
 		return this.jobAdvertisementService.getByEmployeerIdAndStatus(employeerId, status);
-	}
+	}*/
 	
+	@GetMapping("/getJobAdvertisementDetailsByStatusAndByEmployeer")
+	public DataResult<List<JobAdvertisementDto>> getJobAdvertisementDetailsByStatusAndByEmployeer(int employeerId, Boolean status) {
+
+		return this.jobAdvertisementService.getJobAdvertisementDetailsByStatusAndByEmployeer(employeerId, status);
+	}
+
 	@PostMapping("updateStatusAndEmployeerId")
 	public Result updateStatusAndEmployeerId(@RequestParam int id, @RequestParam int employeerId) {
-		
+
 		return this.jobAdvertisementService.updateStatusAndEmployeerId(id, employeerId);
 	}
-	
-	
-	
-	
+
 }
-
-

@@ -13,6 +13,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 
 
 @Service
@@ -69,20 +70,38 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	@Override
 	public DataResult<List<JobAdvertisement>> getByStatus(Boolean status) {
 
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByStatus(status),
-				"İş İlanı Listelendi. Filtre");
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByStatus(status),"İş İlanı Listelendi. Filtre");
+	}
+	
+	@Override
+	public DataResult<List<JobAdvertisementDto>> getJobAdvertisementDetailsByStatus(Boolean status) {
+		
+		return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getJobAdvertisementDetailsByStatus(status), " "+ status+ " ilanları listeledi");
+		
 	}
 
-	@Override
+	/*@Override
 	public DataResult<List<JobAdvertisement>> getByStatusOrderByCreatedDateAsc(Boolean status) {
 		
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByStatusOrderByCreatedDateAsc(status));
+	}*/
+	
+	@Override
+	public DataResult<List<JobAdvertisementDto>> getJobAdvertisementDetailsByStatusOrderDate(Boolean status) {
+		
+		return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getJobAdvertisementDetailsByStatusOrderDate(status));
 	}
 
-	@Override
+	/*@Override
 	public DataResult<List<JobAdvertisement>> getByEmployeerIdAndStatus(int employeerId, Boolean status) {
 		// TODO Auto-generated method stub
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByEmployeerIdAndStatus(employeerId, status));
+	}*/
+	
+	@Override
+	public DataResult<List<JobAdvertisementDto>> getJobAdvertisementDetailsByStatusAndByEmployeer(int employeerId, Boolean status) {
+		
+		return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getJobAdvertisementDetailsByStatusAndByEmployeer(employeerId, status));
 	}
 
 	@Override
@@ -94,10 +113,6 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	}
 
 	
-	
-
-
-
 	
 
 }
