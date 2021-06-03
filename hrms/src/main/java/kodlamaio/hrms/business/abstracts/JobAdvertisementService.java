@@ -15,7 +15,7 @@ public interface JobAdvertisementService {
 	
 	DataResult<List<JobAdvertisement>> getByJobDescription(String name);
 	
-	DataResult<List<JobAdvertisement>> getByStatus(Boolean status);
+	DataResult<List<JobAdvertisementDto>> getByStatus(Boolean status);
 	
 	//Aktif iş ilanları
 	

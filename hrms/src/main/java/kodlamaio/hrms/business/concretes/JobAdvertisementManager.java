@@ -68,9 +68,9 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> getByStatus(Boolean status) {
+	public DataResult<List<JobAdvertisementDto>> getByStatus(Boolean status) {
 
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByStatus(status),"İş İlanı Listelendi. Filtre");
+		return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getByStatus(status),"İş İlanı Listelendi. Filtre");
 	}
 	
 	@Override

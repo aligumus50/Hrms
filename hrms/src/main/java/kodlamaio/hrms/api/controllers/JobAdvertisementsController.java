@@ -3,6 +3,7 @@ package kodlamaio.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,8 +47,9 @@ public class JobAdvertisementsController {
 		return this.jobAdvertisementService.getByJobDescription(name);
 	}
 
+	@Transactional
 	@GetMapping("/getByStatus")
-	public DataResult<List<JobAdvertisement>> getByStatus(Boolean status) {
+	public DataResult<List<JobAdvertisementDto>> getByStatus(Boolean status) {
 		return this.jobAdvertisementService.getByStatus(status);
 	}
 

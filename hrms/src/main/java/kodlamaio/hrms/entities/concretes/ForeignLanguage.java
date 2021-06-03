@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,22 +20,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "cities")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
-//sorguyu loop a çevrimemesi için.
-//Döngüye girmemek için. Her ürünün kategorisi her kategoriye ürün atıyor döngüye giriyor.
-public class City {
+@Table(name = "foreign_language")
+public class ForeignLanguage {
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-
-	@Column(name = "city_name")
-	private String cityName; // name
-
-	// jobAdversiments tablomuz cities tablosu ile ilişkili.
-	@OneToMany(mappedBy = "city") //city field ismi
-	private List<JobAdvertisement> jobAdvertisements;
+	
+	@Column(name = "foreign_language_name")
+	private String foreignLanguageName;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "foreignLanguage")
+	private List<Language> languages; //language tablosu school ile maplendi.
 
 }

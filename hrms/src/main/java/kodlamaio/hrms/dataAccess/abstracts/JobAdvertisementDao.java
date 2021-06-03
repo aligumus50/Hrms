@@ -19,7 +19,7 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	//Aktif iş ilanlarını listeleme
 	
 	//Metot ile kullanım
-	List<JobAdvertisement> getByStatus(Boolean status); 
+	List<JobAdvertisementDto> getByStatus(Boolean status); 
 	
 	//query ile kullanım
 	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertisementDto" + 
