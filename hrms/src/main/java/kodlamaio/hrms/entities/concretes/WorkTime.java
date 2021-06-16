@@ -7,10 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,31 +20,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "image")
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Image {
-
+@Table(name = "work_time")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
+public class WorkTime {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
-	//@Column(name = "curriculum_vitae_id")
-	//private int curriculumVitaeId;
+	@Column(name = "time_type_name")
+	private String timeTypeName;
 	
-	@Column(name = "image_name")
-	private String imageName;
-	
-	@Column(name = "image_url")
-	private String imageUrl;
-	
-	//@Column(name = "image_id")
-	//private String imageId;
-
-	@OneToOne()
-	@JoinColumn(name="curriculum_vitae_id")
-	private CurriculumVitae curriculumVitae;
-
-	
+	// jobAdversiments tablomuz worktype tablosu ile ilişkili.
+	@OneToMany(mappedBy = "workTime") //workType field ismi.
+	private List<JobAdvertisement> jobAdvertisements;
 }

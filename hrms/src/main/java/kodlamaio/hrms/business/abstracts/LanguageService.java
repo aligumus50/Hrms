@@ -4,6 +4,7 @@ import java.util.List;
 
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
+
 import kodlamaio.hrms.entities.concretes.Language;
 
 public interface LanguageService {
@@ -11,4 +12,6 @@ public interface LanguageService {
 	DataResult<List<Language>> getAll();
 	
 	Result add(Language language);
+	
+	DataResult<List<Language>> getByCurriculumVitae_Id(int curriculumvitaeId);
 }

@@ -1,15 +1,12 @@
 package kodlamaio.hrms.api.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,47 +17,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.CandidateService;
+import kodlamaio.hrms.business.abstracts.SystemPersonnelService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.validation.abstracts.HandleValidationExceptionService;
 import kodlamaio.hrms.entities.concretes.Candidate;
-import net.bytebuddy.asm.Advice.This;
+import kodlamaio.hrms.entities.concretes.SystemPersonnel;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
+@RequestMapping("/api/systempersonnels")
+public class SystemPersonnelsController {
 
-	private CandidateService candidateService;
+	private SystemPersonnelService systemPersonnelService;
 	private HandleValidationExceptionService handleValidationExceptionService;
 
 	@Autowired
-	public CandidatesController(CandidateService candidateService,
+	public SystemPersonnelsController(SystemPersonnelService systemPersonnelService,
 			HandleValidationExceptionService handleValidationExceptionService) {
 		super();
-		this.candidateService = candidateService;
+		this.systemPersonnelService = systemPersonnelService;
 		this.handleValidationExceptionService = handleValidationExceptionService;
 	}
 
 	@GetMapping("/getall")
-	public DataResult<List<Candidate>> getAll() {
+	public DataResult<List<SystemPersonnel>> getAll() {
 
-		return this.candidateService.getAll();
+		return this.systemPersonnelService.getAll();
 	}
 
-	/*
-	 * @PostMapping("/add") public Result add(@RequestBody Candidate candidate) {
-	 * return this.candidateService.add(candidate); }
-	 */
+	/*public Result add(SystemPersonnel systemPersonnel) {
 
+		return this.systemPersonnelService.add(systemPersonnel);
+	}*/
+	
 	@PostMapping("/add")
 	// @valid doğrulanması gereken bir alan olduğunu belirtmek için.
 	// validasyondan geçir demek.
-	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
+	public ResponseEntity<?> add(@Valid @RequestBody SystemPersonnel systemPersonnel) {
 
-		return ResponseEntity.ok(this.candidateService.add(candidate));
+		return ResponseEntity.ok(this.systemPersonnelService.add(systemPersonnel));
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -70,23 +67,4 @@ public class CandidatesController {
 		
 		return this.handleValidationExceptionService.handleValidationException(exceptions);
 	}
-
-	/*
-	 * //global exception handler //.class typeof demek tipini vermek için.
-	 * 
-	 * @ExceptionHandler(MethodArgumentNotValidException.class)
-	 * 
-	 * @ResponseStatus(HttpStatus.BAD_REQUEST) public ErrorDataResult<Object>
-	 * handleValidationException(MethodArgumentNotValidException exceptions){
-	 * //hangi alan, neyin kontrol edeceği Map<String, String> validationErros = new
-	 * HashMap<String, String>(); for (FieldError fieldError :
-	 * exceptions.getBindingResult().getFieldErrors()) {
-	 * 
-	 * validationErros.put(fieldError.getField(), fieldError.getDefaultMessage()); }
-	 * 
-	 * ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErros,
-	 * "Doğrulama Hataları");
-	 * 
-	 * return errors; }
-	 */
 }

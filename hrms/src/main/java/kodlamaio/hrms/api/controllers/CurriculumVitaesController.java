@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.CurriculumVitae;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/curriculumvitaes")
 public class CurriculumVitaesController {
@@ -51,7 +53,7 @@ public class CurriculumVitaesController {
 		return new ResponseEntity<>(this.curriculumVitaeService.imageUpload(curriculumVitaeId, multipartFile),HttpStatus.OK);
 	}
 	
-	@PostMapping("/getByCandidateId")
+	@GetMapping("/getByCandidateId")
 	public DataResult<List<CurriculumVitae>> getByCandidateId(int candidateId) {
 		
 		return this.curriculumVitaeService.getByCandidateId(candidateId);

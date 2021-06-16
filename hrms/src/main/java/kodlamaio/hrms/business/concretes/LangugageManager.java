@@ -2,6 +2,7 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.LanguageService;
@@ -16,6 +17,7 @@ public class LangugageManager implements LanguageService {
 
 	private LanguageDao languageDao;
 	
+	@Autowired
 	public LangugageManager(LanguageDao languageDao) {
 		super();
 		this.languageDao = languageDao;
@@ -32,6 +34,12 @@ public class LangugageManager implements LanguageService {
 		
 		this.languageDao.save(language);
 		return new SuccessDataResult<>("Dil deneyimi eklendi.");
+	}
+
+	@Override
+	public DataResult<List<Language>> getByCurriculumVitae_Id(int curriculumvitaeId) {
+		
+		return new SuccessDataResult<List<Language>>(this.languageDao.getByCurriculumVitae_Id(curriculumvitaeId), "Bilinen diller listelendi.");
 	}
 
 }

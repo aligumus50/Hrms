@@ -9,7 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,6 +43,12 @@ public class JobAdvertisement {
 	
 	//@Column(name = "city_id")
 	//private int cityId;
+	
+	//@Column(name="work_type_id")
+	//private int workTypeId;
+	
+	//@Column(name="work_time_id")
+	//private int workTimeId;
 	
 	@Column(name = "number_of_open_positions")
 	private int numberOfOpenPositions;
@@ -70,6 +81,16 @@ public class JobAdvertisement {
 	@JoinColumn(name="job_position_id") //city_id ile city tablosunu joinledik.
 	private JobPosition jobPosition; //City nin iş ilanları olur.
 	
+	@ManyToOne()
+	@JoinColumn(name="work_type_id") //work_type_id ile worktype tablosunu joinledik.
+	private WorkType workType; //worktype in iş ilanları olur.
 	
+	@ManyToOne()
+	@JoinColumn(name="work_time_id") //work_type_id ile worktype tablosunu joinledik.
+	private WorkTime workTime; //worktype in iş ilanları olur.
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "jobAdvertisement")
+	private JobAdvertisementPublish jobAdvertisementPublish;
 
 }

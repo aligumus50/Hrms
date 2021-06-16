@@ -28,15 +28,14 @@ public class CandidateManager implements CandidateService {
 	private EmailSendService emailSendService;
 
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao, 
+	public CandidateManager(CandidateDao candidateDao,
 			@Qualifier("fakeValidation") CandidateUserCheckService candidateUserCheckService,
-			EmailCheckService emailCheckService,
-			@Qualifier("emailService") EmailSendService emailSendService) {
+			EmailCheckService emailCheckService, @Qualifier("fakeEmailService") EmailSendService emailSendService) {
 		super();
 		this.candidateDao = candidateDao;
 		this.candidateUserCheckService = candidateUserCheckService;
-		this.emailCheckService=emailCheckService;
-		this.emailSendService=emailSendService;
+		this.emailCheckService = emailCheckService;
+		this.emailSendService = emailSendService;
 	}
 
 	@Override
@@ -54,6 +53,11 @@ public class CandidateManager implements CandidateService {
 
 		}
 
+		else if (this.candidateUserCheckService.checkIfRealPerson(candidate) == false) {
+
+			return new ErrorResult("TC Kimlik Numarası Doğrulanamadı");
+		}
+
 		else if (this.candidateDao.findByNationalityIdentityEquals(candidate.getNationalityIdentity()) != null) {
 
 			return new ErrorDataResult<>("TC Kimlik Numarası Zaten Var");
@@ -63,36 +67,23 @@ public class CandidateManager implements CandidateService {
 
 			return new ErrorDataResult<>("Mail Adresi Zaten Var");
 		}
-		
-		else if (this.candidateUserCheckService.checkIfRealPerson(candidate)==false) {
 
-			return new ErrorResult("TC Kimlik Numarası Doğrulanamadı"); }
+		else if (checkCandidateEmailAddress(candidate) == false) {
 
-		else if (this.candidateDao.findByNationalityIdentityEquals(candidate.
-				getNationalityIdentity()) != null) {
-				 
-				return new ErrorDataResult<>("TC Kimlik Numarası Zaten Var"); }
-
-				else if
-				 (this.candidateDao.findByEmailAddressEquals(candidate.getEmailAddress()) !=
-				 null) {
-
-				return new ErrorDataResult<>("Mail Adresi Zaten Var"); }
-		
-				else if(checkCandidateEmailAddress(candidate)==false) {
-					
-					return new ErrorResult("Email Adresinizi Kontro Ediniz.");
-				} 
-		else {
+			return new ErrorResult("Email Adresinizi Kontro Ediniz.");
+		} else {
 			this.candidateDao.save(candidate);
 			this.emailSendService.sendEmail(candidate.getEmailAddress());
-			return new SuccessResult("İş arayan kişisi eklendi. Mail Gelen Kutunuzu Kontrol Edin");
-			
+			// this.emailSendService.sendEmail(candidate.getEmailAddress().toString(),
+			// "kodlamaio.hrms doğrulama kodu", "sisteme kaydınızın gerçekleşebilmesi için
+			// doğrulama kodunuz: Z3YN3B");
 
+			return new SuccessResult("İş arayan kişisi eklendi. Mail Gelen Kutunuzu Kontrol Edin");
 
 		}
- 
+
 	}
+
 	private boolean checkAllFieldsControl(Candidate candidate) {
 
 		if (candidate.getFirstName().isEmpty() && candidate.getLastName().isEmpty()
@@ -103,16 +94,14 @@ public class CandidateManager implements CandidateService {
 		}
 		return true;
 	}
-	
+
 	private boolean checkCandidateEmailAddress(Candidate candidate) {
-		
-		if(this.emailCheckService.checkIfRealEmailAddress(candidate.getEmailAddress())!=false) {
-			
+
+		if (this.emailCheckService.checkIfRealEmailAddress(candidate.getEmailAddress()) != false) {
+
 			return true;
 		}
 		return false;
 	}
-	
-	
 
 }

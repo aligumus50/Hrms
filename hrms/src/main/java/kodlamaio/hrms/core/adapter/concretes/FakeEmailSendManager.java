@@ -9,11 +9,18 @@ import kodlamaio.hrms.core.adapter.abstracts.EmailSendService;
 @Qualifier("fakeEmailService")
 public class FakeEmailSendManager implements EmailSendService{
 
+	
 	@Override
 	public void sendEmail(String emailAddress) {
 			
 			System.out.println(emailAddress + " email adressine aktivasyon kodu gönderildi.");
 		
 	}
+
+	/*@Override
+	public void sendEmail(String to, String subject, String text) {
+		// TODO Auto-generated method stub
+		
+	}*/
 
 }

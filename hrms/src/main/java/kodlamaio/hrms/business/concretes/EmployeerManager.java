@@ -61,7 +61,7 @@ public class EmployeerManager implements EmployeerService {
 
 		else {
 			this.employeerDao.save(employeer);
-			this.emailSendService.sendEmail(employeer.getEmailAddress());
+			//this.emailSendService.sendEmail(employeer.getEmailAddress());
 			return new SuccessResult("İş Veren Şirketi Eklendi. Mail Gelen Kutunuzu Kontrol Edin.");
 		}
 

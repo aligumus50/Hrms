@@ -71,8 +71,8 @@ public class CurriculumVitae {
 	private List<Ability> abilities;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "curriculumVitae")
-	private List<Image> images;
+	@OneToOne(mappedBy = "curriculumVitae")
+	private Image image;
 	
 
 }

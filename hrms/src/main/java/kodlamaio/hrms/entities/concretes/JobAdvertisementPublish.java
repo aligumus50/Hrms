@@ -10,45 +10,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "language")
-public class Language {
+@Table(name = "job_advertisement_publish")
+public class JobAdvertisementPublish {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
-	//@Column(name = "curriculum_vitae_id")
-	//private int curriculumVitaeId;
+	//@Column(name = "job_Advertisement_Id")
+	//private int jobAdvertisementId;
 	
-	//@Column(name = "foreign_language_id")
-	//private int foreignLanguageId;
+	//@Column(name = "system_Personnel_Id")
+	//private int systemPersonnelId;
 	
-	@Column(name = "language_level")
-	private String languageLevel;
+	@Column(name = "is_Publish")
+	private boolean isPublish;
 	
 	@Column(name = "created_date")
 	private Date createdDate;
 	
-	@ManyToOne()
-	@JoinColumn(name="curriculum_vitae_id")
-	private CurriculumVitae curriculumVitae;
+	@OneToOne
+	@JoinColumn(name="job_advertisement_id")
+	private JobAdvertisement jobAdvertisement;
 	
-	@ManyToOne()
-	@JoinColumn(name="foreign_language_id")
-	private ForeignLanguage foreignLanguage;
+
+	@ManyToOne
+	@JoinColumn(name="system_Personnel_Id")
+	private SystemPersonnel systemPersonnel;
+	
 
 }

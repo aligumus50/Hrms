@@ -1,17 +1,15 @@
 package kodlamaio.hrms.entities.concretes;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -20,19 +18,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
 @Entity
-@Table(name="candidate")
+@Table(name="system_personnel")
 @PrimaryKeyJoinColumn(name="user_id")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","curriculumVitaes"})
-public class Candidate extends User {
-	
+public class SystemPersonnel extends User{
+
 	@NotBlank
 	@NotNull
 	//@Pattern(regexp = "[a-zA-Z]", message = "İsminiz sadece harflerden oluşabilir. ")
@@ -47,31 +42,16 @@ public class Candidate extends User {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@NotBlank
+	/*@NotBlank //şimdilik tc no tutulmuyor.
 	@NotNull
 	@Length(min = 11, max = 11, message = "Kimlik numaranız 11 hane olmalıdır.")
 	//@Pattern(regexp = "[0-9]" , message = "Kimlik numaranız sadece rakamlardan oluşabilir. ")
 	@Column(name = "nationality_identity")
-	private String nationalityIdentity;
+	private String nationalityIdentity;*/
 	
-	@NotBlank
-	@NotNull
-	@Length(min = 4, max = 4, message = "Doğum yılınız 4 hane olmalıdır.")
-	//@Pattern(regexp = "[0-9]", message = "Doğum yılınız sadece rakamlardan oluşabilir.")
-	@Column(name = "date_of_birth")
-	private String dateOfBirth;
-	
-	//@NotBlank
-	//@NotNull
-	@Column(name = "is_mernis_verified")
-	private boolean isMernisVerified;
-	
-	//@JsonIgnore
-	//ana tablo burası 
-	//ana tablo üzerinden gidiyoruz.
-	@OneToMany(mappedBy = "candidate" ) //field ismi
-	private List<CurriculumVitae> curriculumVitaes; //candidatenin cvleri olur.
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "systemPersonnel")
+	private List<JobAdvertisementPublish> jobAdvertisementPublishes;
 	
 	
 }

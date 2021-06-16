@@ -20,5 +20,7 @@ public class JobAdvertisementDto {
 	private int numberOfOpenPositions;
 	private Date createdDate;
 	private Date applicationLastDate;
+	private String typeName;
+	private String timeTypeName;
 	
 }

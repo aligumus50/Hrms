@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,12 +33,18 @@ public class Ability {
 	//@Column(name = "curriculum_vitae_id")
 	//private int curriculumVitaeId;
 	
+	@NotBlank
+	@NotNull
 	@Column(name = "programming_language_name")
 	private String programmingLanguageName;
 	
+	@NotBlank
+	@NotNull
 	@Column(name = "created_date")
 	private Date createdDate;
 	
+	@NotBlank
+	@NotNull
 	@ManyToOne()
 	@JoinColumn(name="curriculum_vitae_id")
 	private CurriculumVitae curriculumVitae;
