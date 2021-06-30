@@ -1,33 +1,32 @@
 package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.UserService;
+import kodlamaio.hrms.business.abstracts.UniversityService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
-import kodlamaio.hrms.entities.concretes.User;
+import kodlamaio.hrms.entities.concretes.University;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/users")
-public class UsersController {
+@RequestMapping("api/universities")
+public class UniversitiesController {
 
-private UserService userService;
-	
+	UniversityService universityService;
+
 	@Autowired
-	public UsersController(UserService userService) {
+	public UniversitiesController(UniversityService universityService) {
 		super();
-		this.userService = userService;
+		this.universityService = universityService;
 	}
 
-
 	@GetMapping("/getall")
-	public DataResult<List<User>> getAll(){
-		
-		return this.userService.getAll();
+	public DataResult<List<University>> getall() {
+		return this.universityService.getall();
 	}
 }

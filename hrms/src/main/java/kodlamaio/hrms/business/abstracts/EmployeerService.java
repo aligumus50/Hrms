@@ -13,5 +13,9 @@ public interface EmployeerService {
 	
 	Result add(Employeer employeer);
 	
+	DataResult<Employeer> getById(int employeerId);
+	
+	Result updateEmployeerById(int employeerId, String companyName, String emailAddress, String webSiteAddress, String telNumber, String password_);
+	
 	
 }

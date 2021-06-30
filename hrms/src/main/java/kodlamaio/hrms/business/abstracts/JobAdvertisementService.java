@@ -2,6 +2,8 @@ package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
@@ -11,9 +13,15 @@ public interface JobAdvertisementService {
 
 	DataResult<List<JobAdvertisement>> getAll();
 	
+	DataResult<List<JobAdvertisement>> getAll(int pageNo, int pageSize);
+	
+	//DataResult<List<JobAdvertisement>> getAllSorted();
+	
 	Result add(JobAdvertisement jobAdvertisement);
 	
 	DataResult<List<JobAdvertisement>> getByJobDescription(String name);
+	
+	DataResult<List<JobAdvertisement>> getByEmployeer_Id(int employeerId);
 	
 	DataResult<List<JobAdvertisementDto>> getByStatus(Boolean status);
 	
@@ -29,7 +37,11 @@ public interface JobAdvertisementService {
 	
 	DataResult<List<JobAdvertisementDto>> getJobAdvertisementDetailsByStatusAndByEmployeer(int employeerId, Boolean status);
 	
-	Result updateStatusAndEmployeerId(int id, int employeerId);
+	Result updateStatusAndEmployeerId(int id, int employeerId,  Boolean status);
+	
+	Result updateStatusByEmployeer(int id, Boolean status);
+	
+ 	DataResult<List<JobAdvertisement>> findJobAdvertisementByCityId(@Param("id") List<Integer> ids);
 	
 	
 }

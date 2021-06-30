@@ -60,6 +60,12 @@ public class CurriculumVitaeManager implements CurriculumVitaeService{
 		return new SuccessDataResult<List<CurriculumVitae>>(this.curriculumVitaeDao.getByCandidateId(candidateId),"Adaya ait cv listelendi");
 	}
 
+	@Override
+	public DataResult<CurriculumVitae> getById(int curriculumVitaeId) {
+		
+		return new SuccessDataResult<CurriculumVitae>(this.curriculumVitaeDao.getById(curriculumVitaeId), "id ye ait cv listelendi");
+	}
+
 	
 
 	

@@ -95,6 +95,21 @@ public class EmployeerManager implements EmployeerService {
 		return false;
 	}
 
+	@Override
+	public DataResult<Employeer> getById(int employeerId) {
+		
+		
+		return new SuccessDataResult<Employeer>(this.employeerDao.getById(employeerId), "İş veren listelendi.");
+	}
+
+	@Override
+	public Result updateEmployeerById(int employeerId, String companyName, String emailAddress, String webSiteAddress,
+			String telNumber, String password_) {
+		
+		this.employeerDao.updateEmployeerById(employeerId, companyName, emailAddress, webSiteAddress, telNumber, password_);
+		return new SuccessResult("İş veren bilgileri güncellendi");
+	}
+
 	
 
 }

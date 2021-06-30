@@ -86,9 +86,33 @@ public class JobAdvertisementsController {
 	}
 
 	@PostMapping("updateStatusAndEmployeerId")
-	public Result updateStatusAndEmployeerId(@RequestParam int id, @RequestParam int employeerId) {
+	public Result updateStatusAndEmployeerId(@RequestParam int id, @RequestParam int employeerId, @RequestParam  Boolean status) {
 
-		return this.jobAdvertisementService.updateStatusAndEmployeerId(id, employeerId);
+		return this.jobAdvertisementService.updateStatusAndEmployeerId(id, employeerId, status);
+	}
+	
+	@GetMapping("/getByEmployeerId")
+	public DataResult<List<JobAdvertisement>> getByEmployeer_Id(@RequestParam int employeerId) {
+		
+		return this.jobAdvertisementService.getByEmployeer_Id(employeerId);
+	}
+	
+	@PostMapping("updateStatusByEmployeer")
+	public Result updateStatusByEmployeer(@RequestParam int id, @RequestParam Boolean status) {
+		
+		return this.jobAdvertisementService.updateStatusByEmployeer(id, status);
+	}
+	
+	@GetMapping("findJobAdvertisementByCityId")
+	public DataResult<List<JobAdvertisement>> findJobAdvertisementByCityId(@RequestParam List<Integer> ids) {
+		
+		return this.jobAdvertisementService.findJobAdvertisementByCityId(ids);
+	}
+	
+	@GetMapping("/getAllByPage")
+	public DataResult<List<JobAdvertisement>> getAll(int pageNo, int pageSize) {
+		
+		return this.jobAdvertisementService.getAll(pageNo, pageSize);
 	}
 
 }

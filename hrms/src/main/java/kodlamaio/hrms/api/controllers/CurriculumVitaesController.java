@@ -58,4 +58,10 @@ public class CurriculumVitaesController {
 		
 		return this.curriculumVitaeService.getByCandidateId(candidateId);
 	}
+	
+	@GetMapping("/getById")
+	public DataResult<CurriculumVitae> getById(int curriculumVitaeId) {
+		
+		return this.curriculumVitaeService.getById(curriculumVitaeId);
+	}
 }

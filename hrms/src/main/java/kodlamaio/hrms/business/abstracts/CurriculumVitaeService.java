@@ -19,4 +19,6 @@ public interface CurriculumVitaeService {
 	
 	
 	DataResult<List<CurriculumVitae>> getByCandidateId(int candidateId);
+	
+	DataResult<CurriculumVitae> getById(int curriculumVitaeId);
 }

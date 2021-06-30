@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
@@ -19,6 +20,9 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 
 	// Metot ile kullanım
 	List<JobAdvertisementDto> getByStatus(Boolean status);
+
+	// employer id ye göre
+	List<JobAdvertisement> getByEmployeer_Id(int employeerId);
 
 	// query ile kullanım
 	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertisementDto"
@@ -45,7 +49,20 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	// Bir firmanın ilanını pasife alma durumu.
 	@Transactional
 	@Modifying
-	@Query("UPDATE JobAdvertisement j SET j.status = false WHERE j.id =?1 AND j.employeer.id=?2")
-	int updateStatusAndEmployeerId(int id, int employeerId);
+	@Query("UPDATE JobAdvertisement j SET j.status = ?3 WHERE j.id =?1 AND j.employeer.id=?2")
+	int updateStatusAndEmployeerId(int id, int employeerId, Boolean status);
+
+	// Bir firmanın ilanını pasife alma durumu.
+	@Transactional
+	@Modifying
+	@Query("UPDATE JobAdvertisement j SET j.status = ?2 WHERE j.id =?1")
+	int updateStatusByEmployeer(int id, Boolean status);
+	
+	//Şehirlere göre filtreleme
+	@Query("From JobAdvertisement j INNER JOIN j.city c WHERE j.city.id IN :id")
+	List<JobAdvertisement> findJobAdvertisementByCityId(@Param("id") List<Integer> id);
+	
+	
+	
 
 }

@@ -7,4 +7,6 @@ import kodlamaio.hrms.entities.concretes.SystemPersonnel;
 public interface SystemPersonnelDao extends JpaRepository<SystemPersonnel, Integer>{
 
   SystemPersonnel findByEmailAddressEquals(String emailAddress);
+  
+  SystemPersonnel getById(int userId);
 }

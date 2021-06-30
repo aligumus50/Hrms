@@ -67,4 +67,10 @@ public class SystemPersonnelsController {
 		
 		return this.handleValidationExceptionService.handleValidationException(exceptions);
 	}
+	
+	@GetMapping("/getById")
+	public DataResult<SystemPersonnel> getById(int userId) {
+		
+		return this.systemPersonnelService.getById(userId);
+	}
 }

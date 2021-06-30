@@ -44,4 +44,10 @@ public class SystemPersonnelManager implements SystemPersonnelService {
 
 	}
 
+	@Override
+	public DataResult<SystemPersonnel> getById(int userId) {
+		
+		return new SuccessDataResult<SystemPersonnel>(this.systemPersonnelDao.getById(userId), "Sistem personeli listelendi");
+	}
+
 }

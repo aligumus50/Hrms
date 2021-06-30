@@ -11,4 +11,6 @@ public interface SystemPersonnelService {
 	DataResult<List<SystemPersonnel>> getAll();
 	
 	Result add(SystemPersonnel systemPersonnel);
+	
+	DataResult<SystemPersonnel> getById(int userId);
 }
