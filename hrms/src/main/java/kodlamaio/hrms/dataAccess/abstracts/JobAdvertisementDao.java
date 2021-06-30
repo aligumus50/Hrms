@@ -62,7 +62,7 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	@Query("From JobAdvertisement j INNER JOIN j.city c WHERE j.city.id IN :id")
 	List<JobAdvertisement> findJobAdvertisementByCityId(@Param("id") List<Integer> id);
 	
-	
+	//....
 	
 
 }
