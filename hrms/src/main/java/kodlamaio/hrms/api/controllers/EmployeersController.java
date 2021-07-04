@@ -54,4 +54,16 @@ public class EmployeersController {
 		return this.employeerService.updateEmployeerById(employeerId, companyName, emailAddress, webSiteAddress, telNumber, password_);
 		
 	}
+	
+	@PostMapping("/update")
+	public Result update(@RequestBody Employeer employeer) {
+		
+		return this.employeerService.update(employeer);
+	}
+	
+	@PostMapping("/confirmUpdate")
+	public Result confirmUpdate(@RequestParam int employeerId) {
+		
+		return this.employeerService.confirmUpdate(employeerId);
+	}
 }

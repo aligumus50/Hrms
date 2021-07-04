@@ -17,5 +17,16 @@ public interface EmployeerService {
 	
 	Result updateEmployeerById(int employeerId, String companyName, String emailAddress, String webSiteAddress, String telNumber, String password_);
 	
+	//update işlemi jsona yazma
+	Result update(Employeer employeer);
+	
+	//update gerçekleştirme onay sonrası
+	Result confirmUpdate(int employeerId);
+	
+	
+	
+	
+	
+	 
 	
 }

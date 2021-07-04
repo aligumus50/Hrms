@@ -1,6 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,13 +12,18 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Data
@@ -29,6 +35,8 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
 //sorguyu loop a çevrimemesi için.
 //Döngüye girmemek için. Her ürünün kategorisi her kategoriye ürün atıyor döngüye giriyor.
+@ToString(exclude="jobAdvertisements") //iş ilanı olanlara update eklenmiyordu böyle bir çözüm buldum.
+@TypeDef(name = "json", typeClass = JsonBinaryType.class)
 public class Employeer extends User{
 
 	@NotBlank
@@ -55,6 +63,12 @@ public class Employeer extends User{
 	@Column(name="is_system_verified")
 	private boolean isSystemVerified;
 	
+	
+	@Type(type="json")
+	@Column(name="update_profile")
+	private Map<String, Object> updateProfile;
+	
+
 	//jobAdversiments tablomuz employeer tablosu ile ilişkili.
 	@OneToMany(mappedBy = "employeer") //employeer field ismi
 	private List<JobAdvertisement> jobAdvertisements;
