@@ -3,6 +3,8 @@ package kodlamaio.hrms.entities.concretes;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,13 +28,17 @@ public class Activation {
 	@Column(name="id")
 	private int Id;
 	
-	@Column(name="user_id")
-	private int User_Id;
+	//@Column(name="user_id")
+	//private int User_Id;
 	
 	@Column(name="activation_code")
 	private String Activation_Code;
 	
 	@Column(name="created_date_activation")
 	private Date Created_Date_Activation;
+	
+	@ManyToOne()
+	@JoinColumn(name="user_id")
+	private User user;
 
 }

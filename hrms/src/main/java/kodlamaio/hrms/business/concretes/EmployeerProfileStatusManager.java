@@ -14,7 +14,6 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployeerProfileStatusDao;
 import kodlamaio.hrms.entities.concretes.EmployeerProfileStatus;
-import kodlamaio.hrms.entities.concretes.SystemPersonnel;
 
 @Service
 public class EmployeerProfileStatusManager implements EmployeerProfileStatusService{

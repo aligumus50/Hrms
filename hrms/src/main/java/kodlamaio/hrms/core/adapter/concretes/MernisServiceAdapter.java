@@ -17,9 +17,9 @@ public class MernisServiceAdapter implements CandidateUserCheckService{
 	public boolean checkIfRealPerson(Candidate candidate) {
 		
 		KPSPublicSoapProxy kpsPublicSoapProxy = new KPSPublicSoapProxy();
-		boolean result=true;
+		boolean result=false;
 		try {
-			result = kpsPublicSoapProxy.TCKimlikNoDogrula(Long.parseLong("23455996070") ,"ali","gümüş",1990);
+			result = kpsPublicSoapProxy.TCKimlikNoDogrula(Long.parseLong("00000000000") ,"--","----",0000);
 					
 					/*Long.parseLong(candidate.getNationalityIdentity()), 
 					candidate.getFirstName().toUpperCase(), 
@@ -32,11 +32,14 @@ public class MernisServiceAdapter implements CandidateUserCheckService{
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println(e);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println(e);
 		}
 		
+		System.out.println("result: " + result);
 		return result;
 	}
 

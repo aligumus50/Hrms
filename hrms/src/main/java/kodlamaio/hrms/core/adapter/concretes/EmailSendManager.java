@@ -7,8 +7,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import kodlamaio.hrms.core.adapter.abstracts.EmailCheckService;
 import kodlamaio.hrms.core.adapter.abstracts.EmailSendService;
+import kodlamaio.hrms.core.adapter.abstracts.GenerateCodeService;
 
 @Service
 @Qualifier("emailService")
@@ -16,14 +16,17 @@ import kodlamaio.hrms.core.adapter.abstracts.EmailSendService;
 public class EmailSendManager implements EmailSendService{
 	
 	private JavaMailSender javaMailSender;
+	private GenerateCodeService generateCodeService;
+	
 
 	@Autowired
-	public EmailSendManager(JavaMailSender javaMailSender) {
+	public EmailSendManager(JavaMailSender javaMailSender, GenerateCodeService generateCodeService) {
 		super();
 		this.javaMailSender = javaMailSender;
+		this.generateCodeService = generateCodeService;
 	}
 
-	/*@Override
+	@Override
 	public void sendEmail( String to, String subject, String text) {
 		
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -34,15 +37,16 @@ public class EmailSendManager implements EmailSendService{
 		simpleMailMessage.setText(text);
 		
 		this.javaMailSender.send(simpleMailMessage);
-		
 
 		
-	}*/
+	}
 
 	@Override
-	public void sendEmail(String emailAddress) {
-		// TODO Auto-generated method stub
+	public String sendEmail(String emailAddress) {
 		
+		String code = this.generateCodeService.GenerateCode();
+	
+		return code;
 	}
 	
 	

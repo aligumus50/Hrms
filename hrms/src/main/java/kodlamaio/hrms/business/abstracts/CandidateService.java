@@ -11,4 +11,8 @@ public interface CandidateService {
 	DataResult<List<Candidate>> getAll();
 	
 	Result add(Candidate candidate);
+	
+	Result sendMailToCandidate(String email);
+	
+	Result save(Candidate candidate, String code);
 }
