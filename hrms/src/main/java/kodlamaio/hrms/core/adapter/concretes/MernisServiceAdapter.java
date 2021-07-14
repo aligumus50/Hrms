@@ -19,7 +19,7 @@ public class MernisServiceAdapter implements CandidateUserCheckService{
 		KPSPublicSoapProxy kpsPublicSoapProxy = new KPSPublicSoapProxy();
 		boolean result=false;
 		try {
-			result = kpsPublicSoapProxy.TCKimlikNoDogrula(Long.parseLong("00000000000") ,"--","----",0000);
+			result = kpsPublicSoapProxy.TCKimlikNoDogrula(Long.parseLong("") ,"","",0000);
 					
 					/*Long.parseLong(candidate.getNationalityIdentity()), 
 					candidate.getFirstName().toUpperCase(), 
